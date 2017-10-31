@@ -4,7 +4,7 @@
     <head>
     <div class="page-header">
         <h1><a href="/">Blog</a></h1>
-        <a href="http://dmytrolutchyn.pythonanywhere.com/admin/login/" class="signin">Log In</a>
+        <a href="http://dmytrolutchyn.pythonanywhere.com/admin/login/" class="signin">Sign in for admin</a>
     </div>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -12,9 +12,15 @@
         <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     </head>
 <body>
-<a href="http://dmytrolutchyn.pythonanywhere.com/login/">Login</a>
 {% block content %}
-  <p>Hello {{ user.username }}!</p>
+    <div id="mydivtag"></div>
+    <script>
+        if ({{ user.username }} == ""){
+            document.getElementById('mydivtag').innerHTML = "<a href='http://dmytrolutchyn.pythonanywhere.com/login/'>Sign in</a> or <a href='http://dmytrolutchyn.pythonanywhere.com/signup/'>Sign up</a>";
+        }else{
+            document.getElementById('mydivtag').innerHTML = "<p>Hello {{ user.username }}";
+        }
+    </script>
 {% endblock %}
 <div class="content container">
     <div class="row">

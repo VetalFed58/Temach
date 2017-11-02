@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^signup/$', core_views.signup, name='signup'),
     url(r'^$', main_page),
+    url(r'^post/(?P<post_id>\d+)', post),
     url(r'^post/\d+', post),
     url(r'^accounts/profile/', main_page),
 ]

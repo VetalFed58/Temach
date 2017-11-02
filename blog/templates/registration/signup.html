@@ -6,8 +6,8 @@
       <p>
         {{ field.label_tag }}<br>
         {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
+        {% if field.help_text != "<ul><li>Your password can&#39;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&#39;t be a commonly used password.</li><li>Your password can&#39;t be entirely numeric.</li></ul>" %}
+            <small style="color: grey">{{ field.help_text }}</small>
         {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>

@@ -1,11 +1,12 @@
 from .models import Post, Comment
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+
+
 import sys
+from django.http import HttpResponse
 
 def main_page(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -30,14 +31,16 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.birth_date = form.cleaned_data.get('birth_date')
+            user.save()
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=user.username, password=raw_password)
             login(request, user)
             return redirect('http://dmytrolutchyn.pythonanywhere.com')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})

@@ -4,7 +4,7 @@
     <head>
     <div class="page-header">
         <h1><a href="/">Blog</a></h1>
-        <a href="http://dmytrolutchyn.pythonanywhere.com/admin/login/" class="signin">Login for admin</a>
+        <a href="/admin/login/" class="signin">Login for admin</a>
     </div>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -14,9 +14,9 @@
 <body>
 {% block content %}
     {% if user.username == "" %}
-        <a href='http://dmytrolutchyn.pythonanywhere.com/login/'>Login</a> or <a href='http://dmytrolutchyn.pythonanywhere.com/signup/'>Sign up</a>
+        <a href='/login/'>Login</a> or <a href='/signup/'>Sign up</a>
     {% else %}
-        <p>Hello {{ user.username }}! <a href='http://dmytrolutchyn.pythonanywhere.com/logout/'>Logout</a></p>
+        <p>Hello {{ user.username }}! <a href='/logout/'>Logout</a></p>
     {% endif %}
 {% endblock %}
 <div class="content container">

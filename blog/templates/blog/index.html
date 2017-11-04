@@ -14,9 +14,10 @@
 <body>
 {% block content %}
     {% if user.username == "" %}
-        <a href='/login/'>Login</a> or <a href='/signup/'>Sign up</a>
+       <!--<a href='/login/'>Login</a> or <a href='/signup/'>Sign up</a>-->
+        <p><a href="{% url 'blog:login' %}">Login</a> or <a href='/signup/'>Sign up</a></p>
     {% else %}
-        <p>Hello {{ user.username }}! <a href='/logout/'>Logout</a></p>
+        <a href="{% url 'blog:logout' %}">Logout</a><br>
     {% endif %}
 {% endblock %}
 <div class="content container">

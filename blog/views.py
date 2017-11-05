@@ -3,15 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
-import sys
-from django.http import HttpResponse
-from django import forms
-
 
 def main_page(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/index.html', {'posts': posts})
 
 def post(request, post_id):
@@ -46,5 +41,6 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-def logout(request):
-    return redirect('http://dmytrolutchyn.pythonanywhere.com')
+
+
+

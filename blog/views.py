@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
+from datetime import datetime
+from django.contrib.auth.models import User
 
 def main_page(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
@@ -21,6 +23,25 @@ def post(request, post_id):
 
     return render(request, 'blog/index.html', {
         'post': post
+    })
+
+def load_new_fixtures(request):
+    table = []
+    if request.method == 'POST':
+        text = request.POST['fixtures']
+        for line in text.splitlines():
+            team1, score, team2, year, month, link = line.split(',')
+            author = User.objects.get(pk=1)
+            text = '''
+                <p><a href="{link}">See more info</a></p>
+            '''.format(
+                link = link
+            )
+            post = Post(title = team1 + score + team2, text =text, author = author, published_date = datetime.now())
+            post.save()
+            table.append([team1, score, team2, year, month, link])
+    return render(request, 'blog/table.html', {
+        "table": table
     })
 
 @login_required

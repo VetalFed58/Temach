@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from blog.views import main_page,post
 from django.contrib.auth import views as auth_views
 from blog import views as core_views
 
@@ -25,11 +24,4 @@ urlpatterns = [
     url(r'^', include('blog.urls', namespace='blog')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^signup/$', core_views.signup, name='signup'),
-    url(r'^post/(?P<post_id>\d+)/$', post),
-    url(r'^$', main_page),
-    url(r'^accounts/profile/', main_page),
 ]
-
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'

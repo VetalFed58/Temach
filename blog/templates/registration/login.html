@@ -1,11 +1,15 @@
+{% extends 'base.html' %}
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-  <br>
-  <p><strong>-- OR --</strong></p>
-  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+<div class="content container">
+    <h5>Have not you registered yet? <a href='/signup'>Sign up!</a></h5>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <br>
+    <p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+</div>
 {% endblock %}

@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<html>
+    <title>Temach</title>
+    <head>
+    <div class="page-header">
+        <h1><a href="/">Temach</a></h1><h3><a href='/'>All posts</a>&nbsp;&nbsp;&nbsp;<a href='/football/'>Football</a>&nbsp;&nbsp;&nbsp;<a href='/technologies/'>Formula 1</a></h3>
+        <div style='text-align:right'>
+            {% if user.username == "" %}
+                Hello!<a href="{% url 'blog:login' %}"> Login </a> or <a href='/signup/'> Sign up </a>
+            {% else %}
+                Hello, <b>{{request.user.username}}</b>!<a href="{% url 'blog:logout' %}"> Logout </a><br>
+            {% endif %}
+            <p><a href="/create_post/"> Create a new post </a></p>
+        </div>
+    </div>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    </head>
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/infinite.min.js' %}"></script>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

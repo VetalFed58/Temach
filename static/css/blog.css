@@ -3,13 +3,13 @@ h1 a {
     font-family: 'Lobster';
 }
 .page-header {
-    background-color: #31ADD6;
+    background-color: rgba(0, 168, 107, 0.8);
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
+    color: #000;
     font-size: 36pt;
     text-decoration: none;
 }
@@ -49,9 +49,39 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+
 .signin{
     font-size: 13pt;
     text-decoration: none;
     float: right;
     color: #ffffff;
+}
+
+body {
+	background-position: center center;
+	background-repeat:  no-repeat;
+	background-attachment: fixed;
+	background-size:  cover;
+	background-color: #999;
+}
+
+.background_post {
+    list-style-type: none;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(0, 168, 107, 0.8);
+    width: 708px;
+}
+.more{
+    margin-left: 40px;
+    background-color: rgba(0, 168, 107, 0.8);
+    color: #000;
+    font-size: 36pt;
+    text-decoration: none;
+}
+.more h2, .more h2 a, .more h2 a:visited, .more h2 a:active {
+    color: #000;
+    text-decoration: none;
 }

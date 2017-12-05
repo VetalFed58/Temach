@@ -1,43 +1,21 @@
-{% load staticfiles %}
-<html>
-    <title>My Site</title>
-    <head>
-    <div class="page-header">
-        <h1><a href="/">Blog</a></h1>
-        <a href="/admin/login/" class="signin">Login for admin</a>
-    </div>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    </head>
-
-<body>
+{% extends 'base.html' %}
 {% block content %}
-    {% if user.username == "" %}
-        <p>Hello!<a href="{% url 'blog:login' %}"> Login </a> or <a href='/signup/'> Sign up </a></p>
-    {% else %}
-        Hello, {{request.user.username}}!<a href="{% url 'blog:logout' %}"> Logout </a><br>
-    {% endif %}
-    <p><a href="{% url 'blog:post' %}"> Make a new post </a></p>
-{% endblock %}
-<div class="content container">
-    <div class="row">
-        <div class="col-md-8">
-            <table>
-                {% for line in table %}
-                    <tr> {% for field in line %} <td>{{field}}</td> {% endfor %}</tr>
-                {% endfor %}
-            </table>
-
-            <form action="" method="POST">
-                {% csrf_token %}
-                <textarea name="fixtures"></textarea>
-                <input type="submit" value="upload" />
-            </form>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class=".signin">
+                    <table>
+                        {% for line in table %}
+                            <tr> {% for field in line %} <td>{{field}}</td> {% endfor %}</tr>
+                        {% endfor %}
+                    </table>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <textarea name="fixtures"></textarea>
+                        <input type="submit" value="upload" />
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-</body>
-</html>
+{% endblock %}

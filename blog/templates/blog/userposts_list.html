@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<body background="/static/ws_Football_field_1920x1080.jpg">
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                    <div class="infinite-container">
+                        {% for post in posts %}
+                            {% if post.topic == "user" %}
+                                <div class="background_post">
+                                    <div class="post">
+                                        <div class="date">
+                                            <p>published: {{ post.published_date }}</p>
+                                        </div>
+                                        <h3>{{ post.text|safe }}</a></h3>
+                                        <p>{{ post.author }}</p>
+                                    </div>
+                                    {% for comment in post.comment_set.all %}
+                                        <p><strong>{{comment.author.username}}</strong> {{ comment.text }}</p>
+                                    {% endfor %}
+                                    <form action="/post/{{post.id}}/" method="post">
+                                        {% csrf_token %}
+                                        <textarea name="comment_text"></textarea>
+                                        <input type="submit" value="OK">
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+            </div>
+        </div>
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">
+                <div class="infinite-container">
+                    <div class="background_post">
+                        <div class="more"><h2><center>More</center></h2></div>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+        <script>
+            var infinite = new Waypoint.Infinite({
+                element: $('.infinite-container')[0]
+            });
+        </script>
+    </div>
+</body>
+{% endblock %}

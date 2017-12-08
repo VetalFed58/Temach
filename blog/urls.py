@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^$', views.main_page, name='home'),
     url(r'^post/(?P<post_id>\d+)/$', views.post),
     url(r'^create_post/$', views.create_post),
-    url(r'^football/$', views.main_page),
-    url(r'^technologies/$', views.main_page),
+    url(r'^football/$', views.football_page),
+    url(r'^technologies/$', views.technologies_page),
+    url(r'^userposts/$', views.userposts_page),
 ]

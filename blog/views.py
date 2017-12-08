@@ -1,12 +1,13 @@
 from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
 from datetime import datetime
 from django.contrib.auth.models import User
+
+from django.utils import timezone
 import sched, time
 
 def main_page(request):
@@ -41,13 +42,11 @@ def load_new_fixtures(request):
         text = request.POST['fixtures']
         for line in text.splitlines():
             team1, score, team2, year, month, link = line.split(',')
-            author = User.objects.get(pk=1)
+            author = User.objects.all()[12]
             text = '''
-                <p><a href="{link}">See more info</a></p>
-            '''.format(
-                link = link
-            )
-            post = Post(title = team1 + score + team2, text =text, author = author, published_date = datetime.now())
+                <p>{0} {1} {2}. <a href="{3}">See more info</a></p>
+            '''.format(team1,score,team2,link)
+            post = Post(topic = "football", text =text, author = author, published_date = datetime.now())
             post.save()
             table.append([team1, score, team2, year, month, link])
     return render(request, 'blog/table.html', {
@@ -76,11 +75,10 @@ def signup(request):
 def create_post(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            name = request.POST['name']
             text = request.POST['text']
             date = datetime.now()
             author = request.user
-            post = Post(title = name, text = text, author = author, published_date = date)
+            post = Post(topic = 'user', text = text, author = author, published_date = date)
             post.save()
             return redirect('/')
     else:

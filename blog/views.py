@@ -23,36 +23,36 @@ def main_page(request):
 
 def userposts_page(request):
     page = request.GET.get('page', 1)
-    paginator = Paginator(Post.objects.all()[::-1], 20)
+    paginator = Paginator(Post.objects.filter(topic="user")[::-1], 20)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog/userposts_list.html', {'posts': posts})
+    return render(request, 'blog/index.html', {'posts': posts})
 
 def football_page(request):
     page = request.GET.get('page', 1)
-    paginator = Paginator(Post.objects.all()[::-1], 20)
+    paginator = Paginator(Post.objects.filter(topic="football")[::-1], 20)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog/football_list.html', {'posts': posts})
+    return render(request, 'blog/index.html', {'posts': posts})
 
 def technologies_page(request):
     page = request.GET.get('page', 1)
-    paginator = Paginator(Post.objects.all()[::-1], 20)
+    paginator = Paginator(Post.objects.filter(topic="technologies")[::-1], 20)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog/technologies_list.html', {'posts': posts})
+    return render(request, 'blog/index.html', {'posts': posts})
 
 def post(request, post_id):
     if request.user.is_authenticated:

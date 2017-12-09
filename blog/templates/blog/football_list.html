@@ -6,25 +6,23 @@
             <div class="col-md-8">
                     <div class="infinite-container">
                         {% for post in posts %}
-                            {% if post.topic == "football" %}
-                                <div class="background_post">
-                                    <div class="post">
-                                        <div class="date">
-                                            <p>published: {{ post.published_date }}</p>
-                                        </div>
-                                        <h3>{{ post.text|safe }}</a></h3>
-                                        <p>{{ post.author }}</p>
+                            <div class="background_post">
+                                <div class="post">
+                                    <div class="date">
+                                        <p>published: {{ post.published_date }}</p>
                                     </div>
-                                    {% for comment in post.comment_set.all %}
-                                        <p><strong>{{comment.author.username}}</strong> {{ comment.text }}</p>
-                                    {% endfor %}
-                                    <form action="/post/{{post.id}}/" method="post">
-                                        {% csrf_token %}
-                                        <textarea name="comment_text"></textarea>
-                                        <input type="submit" value="OK">
-                                    </form>
+                                    <h3>{{ post.text|safe }}</a></h3>
+                                    <p>{{ post.author }}</p>
                                 </div>
-                            {% endif %}
+                                {% for comment in post.comment_set.all %}
+                                    <p><strong>{{comment.author.username}}</strong> {{ comment.text }}</p>
+                                {% endfor %}
+                                <form action="/post/{{post.id}}/" method="post">
+                                    {% csrf_token %}
+                                    <textarea name="comment_text"></textarea>
+                                    <input type="submit" value="OK">
+                                </form>
+                            </div>
                         {% endfor %}
                     </div>
             </div>
